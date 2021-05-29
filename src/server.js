@@ -1,13 +1,19 @@
 const express = require('express');
+const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
+
+app.use(cors());
 
 app.listen(3000, () => {
     console.log('your server ready at http://localhost:3000');
 })
 
-app.get('/', (_, res) => {
-    res.json({
-        ok: true
+fs.readdir(path.join(__dirname, "routes"), (err, files) => {
+    files.forEach(file => {
+        const route = require(path.join(__dirname, "routes", file));
+        if (route.path && route.router) app.use(route.path, route.router);
     })
 })
