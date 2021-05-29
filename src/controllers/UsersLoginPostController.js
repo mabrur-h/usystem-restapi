@@ -3,10 +3,10 @@ const LoginValidation = require('../validations/LoginValidation');
 
 module.exports = async (req, res) => {
     try {
-        let { id, password } = await LoginValidation.validateAsync(req.body);
+        let { phone, password } = await LoginValidation.validateAsync(req.body);
         let user = await req.psql.users.findOne({
             where: {
-                id: id
+                phone: phone
             }
         });
         if (!user) throw new Error("User is not defined!");

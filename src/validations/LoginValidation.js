@@ -1,7 +1,9 @@
 const Joi = require('joi');
 
 module.exports = Joi.object({
-    id: Joi.string()
+    phone: Joi.number()
+        .min(998000000000)
+        .max(998999999999)
         .required(),
     password: Joi.string()
         .required()

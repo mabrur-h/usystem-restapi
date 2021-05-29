@@ -3,16 +3,12 @@ const {generateHash} = require("../modules/bcrypt");
 
 module.exports = async (req, res) => {
     try {
-        let { name, password } = await SignUpValidation.validateAsync(req.body);
-        console.log(password)
+        let { name, password, phone } = await SignUpValidation.validateAsync(req.body);
         let user = await req.psql.users.create({
             name: name,
-            password: await generateHash(password)
+            password: await generateHash(password),
+            phone: phone
         });
-        user = {
-            id: user.id,
-            name: user.name
-        }
         res.status(200).json({
             ok: true,
             data: user,

@@ -6,7 +6,7 @@ const sequelize = new Sequelize("postgres://postgres:pgadmin@localhost:5432/usys
     logging: e => console.log("SQL: ", e)
 });
 
-module.exports = postgres();
+module.exports = postgres;
 
 async function postgres () {
     try {

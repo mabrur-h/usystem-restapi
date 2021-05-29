@@ -8,5 +8,9 @@ module.exports = Joi.object({
     password: Joi.string()
         .required()
         .min(6)
-        .max(32)
+        .max(32),
+    phone: Joi.number()
+        .min(998000000000)
+        .max(998999999999)
+        .required()
 })
