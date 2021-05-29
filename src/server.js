@@ -2,8 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const psql = require('./modules/postgres');
 
 const app = express();
+
+app.use(async (req, res, next) => {
+    req.psql = await psql;
+    next();
+})
 
 app.use(cors());
 

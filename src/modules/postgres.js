@@ -1,21 +1,24 @@
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize("postgres://postgres:pg_admin@localhost:5432/usystem", {
+const { Sequelize, DataTypes } = require('sequelize');
+const UserModel = require('../models/UserModel')
+
+const sequelize = new Sequelize("postgres://postgres:pgadmin@localhost:5432/usystem", {
     logging: e => console.log("SQL: ", e)
 });
 
-sequelize.define('users', {
-    name: {
-        type: Sequelize.DataTypes.STRING(32),
+module.exports = postgres();
 
-    }
-})
-
-;(async function() {
+async function postgres () {
     try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully!');
-        await sequelize.sync({ force: true });
+        let db = {};
+        db.users = UserModel(Sequelize, sequelize);
+        // let user = await db.users.create({
+        //     name: "mabrur",
+        //     password: "testtest"
+        // })
+        // console.log(user)
+        // await sequelize.sync({ force: false });
+        return db
     } catch (e) {
         console.log(e);
     }
-})()
+}
