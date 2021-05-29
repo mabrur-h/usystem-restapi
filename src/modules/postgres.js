@@ -16,7 +16,7 @@ async function postgres () {
         //     password: "testtest"
         // })
         // console.log(user)
-        // await sequelize.sync({ force: false });
+        // await sequelize.sync({ force: true });
         return db
     } catch (e) {
         console.log(e);

@@ -11,6 +11,8 @@ app.use(async (req, res, next) => {
     next();
 })
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 app.listen(3000, () => {
