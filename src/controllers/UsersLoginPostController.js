@@ -20,17 +20,18 @@ module.exports = async (req, res) => {
             ipAddress: ip,
             userAgent: userAgent
         })
-        console.log(user)
 
         let token = generateJWTToken({ id: sessionId });
-        console.log(token);
         // user = {
         //     id: user.id,
         //     name: user.name
         // }
         res.status(200).json({
             ok: true,
-            message: "Successfully registered!"
+            message: "Successfully registered!",
+            data: {
+                token
+            }
         })
     } catch (e) {
         res.status(400).json({
