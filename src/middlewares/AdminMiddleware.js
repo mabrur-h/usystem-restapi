@@ -1,15 +1,16 @@
-const AuthMiddleware = require('../middlewares/AuthMiddleware');
-
 module.exports = async (req, res, next) => {
     try {
+        const admin = await req.psql.admins.findOne({
+            where: {
+                user_id: req.user.id
+            }
+        })
 
-        await AuthMiddleware(req, res, next)
-
-        console.log("test");
+        if (!admin) throw new Error("Method not allowed!");
 
         next();
     } catch (e) {
-        res.status(403).json({
+        res.status(405).json({
             ok: false,
             message: e + ''
         })

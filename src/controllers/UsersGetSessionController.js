@@ -1,6 +1,5 @@
 module.exports = async (req, res) => {
     try {
-        console.log(req.user, req.session)
         let sessions = await req.psql.sessions.findAll({
             where: {
                 user_id: req.user.id

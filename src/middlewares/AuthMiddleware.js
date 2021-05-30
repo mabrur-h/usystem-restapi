@@ -1,4 +1,4 @@
-const { checkToken } = require("../../../restapi/src/modules/jwt");
+const { checkToken } = require("../modules/jwt");
 
 module.exports = async (req, res, next) => {
     try {
