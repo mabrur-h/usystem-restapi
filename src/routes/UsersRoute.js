@@ -4,9 +4,11 @@ const UsersSignUpPostController = require('../controllers/UsersSignUpPostControl
 const UsersLoginPostController = require('../controllers/UsersLoginPostController');
 const UsersGetSessionController = require('../controllers/UsersGetSessionController');
 
+const AuthMiddleware = require('../middlewares/AuthMiddleware');
+
 // Get routers
 router.get('/', UsersGetController);
-router.get('/sessions', UsersGetSessionController)
+router.get('/sessions', AuthMiddleware, UsersGetSessionController)
 
 // Post routers
 router.post('/signup', UsersSignUpPostController);

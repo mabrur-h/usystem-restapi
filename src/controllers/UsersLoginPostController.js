@@ -1,5 +1,6 @@
 const { compare } = require("../modules/bcrypt");
 const LoginValidation = require('../validations/LoginValidation');
+const { generateJWTToken } = require("../../../restapi/src/modules/jwt");
 
 module.exports = async (req, res) => {
     try {
@@ -14,12 +15,15 @@ module.exports = async (req, res) => {
         let userAgent = req.headers["user-agent"];
         let ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
         if (!(userAgent && ip)) throw new Error("Invalid request!");
-        let session = await req.psql.sessions.create({
+        let { id: sessionId } = await req.psql.sessions.create({
             user_id: user.id,
             ipAddress: ip,
             userAgent: userAgent
         })
-        console.log(session);
+        console.log(user)
+
+        let token = generateJWTToken({ id: sessionId });
+        console.log(token);
         // user = {
         //     id: user.id,
         //     name: user.name
