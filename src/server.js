@@ -20,6 +20,7 @@ app.use(helmet())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 app.listen(3000, () => {
     console.log('your server ready at http://localhost:3000');
