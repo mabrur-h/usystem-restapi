@@ -7,7 +7,6 @@ module.exports = (Sequelize, sequelize) => {
         },
         name: {
             type: Sequelize.DataTypes.STRING(128)
-        },
-
+        }
     })
 }
