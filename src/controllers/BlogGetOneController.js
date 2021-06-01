@@ -15,6 +15,9 @@ module.exports = async (req, res) => {
                 }
             ]
         })
+
+        if (!blog) throw new Error("Blog not found!");
+
         res.json({
             ok: true,
             data: blog
