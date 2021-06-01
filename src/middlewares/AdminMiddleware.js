@@ -1,5 +1,7 @@
 module.exports = async (req, res, next) => {
     try {
+        console.log(req.user.id)
+
         const admin = await req.psql.admins.findOne({
             where: {
                 user_id: req.user.id
